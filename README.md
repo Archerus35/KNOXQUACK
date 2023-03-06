@@ -26,4 +26,4 @@ _El servicio de despliegue usado para esta ocasión es Streamlit, debido a su gu
 ## Autores ✒️
 
 * Ismael Armada González
-* Angel
+* Ángel Serón Márquez
