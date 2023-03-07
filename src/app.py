@@ -1,33 +1,19 @@
-from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
+import streamlit as st
+import pymongo
+from pymongo import MongoClient
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reviews.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+# crea una instancia de conexión con la base de datos MongoDB
+client = pymongo.MongoClient("mongodb://localhost:27017")
 
-class Review(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    content = db.Column(db.Text, nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
+# selecciona la base de datos que quieres usar
+db = client.knoxquack
 
-@app.route('/')
-def index():
-    reviews = Review.query.all()
-    return render_template('index.html', reviews=reviews)
+collection = db.games
 
-@app.route('/add', methods=['GET', 'POST'])
-def add_review():
-    if request.method == 'POST':
-        title = request.form['title']
-        content = request.form['content']
-        rating = request.form['rating']
-        review = Review(title=title, content=content, rating=rating)
-        db.session.add(review)
-        db.session.commit()
-        return redirect(url_for('index'))
-    return render_template('add_review.html')
+# haz una consulta a la colección de games para obtener los primeros 5 juegos
+resultados = collection.find().limit(5)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# muestra los resultados en una tabla de Streamlit
+st.write("Los primeros 5 juegos:")
+for resultado in resultados:
+    st.write(resultado)
