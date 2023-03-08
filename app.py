@@ -24,14 +24,30 @@ resultados = db.games.find().limit(5)
 #for resultado in resultados:
     #st.write(resultado)
 
-titles = pd.DataFrame(collection.distinct("title")[:11], columns=["Titulo"])
+titles = pd.DataFrame(collection.distinct("title")[:6], columns=["Titulo"])
 #description = pd.DataFrame(collection.distinct("description")[:11], columns=["description"])
-score = pd.DataFrame(collection.distinct("score")[:11], columns=["Puntuacion"])
-date = pd.DataFrame(collection.distinct("date")[:11], columns=["Fecha"])
-img_url = pd.DataFrame(collection.distinct("img_url")[:11], columns=["Imagen"])
-tablas = pd.concat([titles,score,date,img_url],axis=1)
+score = pd.DataFrame(collection.distinct("score")[:6], columns=["Puntuacion"])
+date = pd.DataFrame(collection.distinct("date")[:6], columns=["Fecha"])
+#img_url = pd.DataFrame(collection.distinct("img_url")[:6], columns=["Imagen"])
+tablas = pd.concat([titles,score,date],axis=1)
 st.table(tablas)
 
+game_titles = collection.distinct("title")
+game_title = st.selectbox("Seleccionar un juego:", game_titles)
 
+# Retrieve data for game title from MongoDB
+if game_title:
+    query = {"title": game_title}
+    data = collection.find_one(query)
+    if data:
+        title = data["title"]
+        score = data["score"]
+        date = data["date"]
+        
+        # Create DataFrame and display as table
+        df = pd.DataFrame({"Titulo": [title], "Puntuacion": [score], "Fecha": [date]})
+        st.table(df)
+    else:
+        st.write("No hay datos sobre ese juego:", game_title)
 
 
