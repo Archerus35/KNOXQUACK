@@ -20,6 +20,10 @@ style = f'''
 
 st.markdown(style, unsafe_allow_html=True)
 
+image = Image.open('image/pato.jpg')
+
+st.image(image)
+
 
 def display_game_card(game):
     st.subheader(str(game["game_id"]) + ". " +game["title"])
