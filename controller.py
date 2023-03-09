@@ -11,6 +11,8 @@ db = client.knoxquack
 
 collection = db.games
 
+collection = db.users
+
 # haz una consulta a la colección de games para obtener los primeros 5 juegos
 
 
@@ -23,3 +25,22 @@ def show_all_games():
 def show_limit(limit:int):
     resultados = db.games.find().limit(limit)
     return resultados
+
+
+
+def collection():
+    collection = db.games 
+    return collection 
+
+def users_list():
+    users = db.users.distinct("username")
+    return users
+
+def find_user(query):
+    query = {"username" : query}
+    user_query = db.users.find_one(query)
+    if user_query:
+        return user_query
+    else:
+        return None 
+    
