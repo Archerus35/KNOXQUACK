@@ -5,6 +5,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from PIL import Image
+import streamlit.components.v1 as components
 
 from controller import *
 
@@ -85,6 +86,7 @@ with col3:
 with col4: 
    display_game_card(juego4)
 
+components.iframe("https://console.dialogflow.com/api-client/demo/embedded/90ff94ad-fac5-49f0-aabe-49237f6da2e6", height=430, width=350)        
 
 
 
