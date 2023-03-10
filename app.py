@@ -82,10 +82,28 @@ with tab2:
             st.subheader(user_data["user_id"])
     else:
         st.write("No existen datos de ese usuario")
+   
+    user_reviews = show_user_reviews(user_data["user_id"])
 
+    df_user_reviews = pd.DataFrame(list(user_reviews))
+    columns = ['game_id', 'game_title', 'user_score', 'user_review_date']
+    df_user_reviews_subset = df_user_reviews[columns]
 
+    st.table(df_user_reviews_subset)
 
+    st.subheader("Recomendaciones")
+
+    recommendations = get_recommendations(user_data["user_id"])
     
+    for rec in recommendations: 
+        st.subheader(rec["game_title"])
+        col1, col2 = st.columns(2)
+
+        with col1: 
+            st.image(rec["img_url"])
+        with col2:
+            st.caption("Afinidad")
+            st.subheader(round(rec["affinity"],2))
 
 with tab3:
     components.iframe("https://console.dialogflow.com/api-client/demo/embedded/90ff94ad-fac5-49f0-aabe-49237f6da2e6", height=430, width=350)   
