@@ -113,7 +113,42 @@ sencillo como ejecutar `model.save("nombre_deseado")`. Posteriormente se usará 
 carpeta con los datos del modelo entrenado. 
 
 
-##  6. Integración del modelos en la aplicación 
+##  6. Integración del modelo en la aplicación 
+
+El modelo que hemos generado en el paso anterior, en nuestro caso, se encuentra en la carpeta `als_model` para cargarlo usamos una librería 
+diferente `ALSModel` que puede ejcutar la función `load` para cargar el modelo que se encuentra nuestro proyecto. Para no realizar todo 
+el proceso de golpe cada vez que se realizan recomendaciones hemos creado una clase que implementa el sistema de recomendación para 
+así poder dejar algunos pasos precargados y solo cargar los que sean necesarios para determinar las recomendaciones de usuario. 
+
+Con este mismo objetivo se ha separado también los juegos más populares `popular_games.csv` y los nombres de los juegos previamente para 
+evitar muchas consultas a la base de datos, lo cual ralentiza muchísimo la aplicación. 
+
+La clase utiliza:
+
+* Un constructor para iniciar la sesión de Spark 
+* Método para detener la sesión 
+* Método para cargar los nombres de los juegos 
+* Método para cargar el modelo 
+* Método para cargar los juegos populares
+* Método para realizar la predicción 
+* Método para transformar los datos de salida de nuevo para evitar consultas reiteradas a la base de datos
+
+![Captura desde 2023-03-12 18-02-49](https://user-images.githubusercontent.com/116188406/224560262-743ca77b-845f-4dcc-8992-bae33e5cb5af.png)
+
+Estos serían los pasos a seguir 
+
+![Captura desde 2023-03-12 18-06-10](https://user-images.githubusercontent.com/116188406/224560469-03f6e052-bd59-4015-8273-ccd935d1d613.png)
+
+En la aplicación se cargan previamente:
+* La sesión 
+* El modelo 
+* Los nombres de los juegos 
+* Los juegos populares 
+
+Y a la hora de recibir las recomendaciones se cargan:
+* El ajuste de los datos
+* La predicción o transformación del modelo 
+* La transformación de los datos de salida
 
 ##  7. Aplicación de Procesamiento del Lenguaje Natural: Chatbot con dialog flow 
 
