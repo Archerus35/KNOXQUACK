@@ -66,6 +66,53 @@ Por último antes de pasar al entrenamiento nos aseguramos de que todos los dato
 
 ##  5. Entrenamiento del modelo y resultados 
 
+Para este caso, se ha decidido utlizar un algoritmo de recomendación llamado `Alternating Least Squares` o `ALS` para los amigos. Este algoritmo realiza
+como todos, operaciones de productos de matrices para tratar de estimar una puntuación y está pensado específicamente para usuarios, productos 
+y puntuaciones. En un experimento realizado hace algunas semanas dio buenos resultados para los datos de puntuaciones de películas de imdb. Este 
+algoritmo además es usado por grandes compañías como Netflix o Amazon entre otras. 
+
+También se consideró el algoritmo `a priori` disponible en la librería de `apyori` de `python`, funcionaba bien para datos de cestas de la compra 
+pero no hubo tiempo de probarlo, pues la implementación de este sistema se comió gran parte del tiempo de este proyecto. 
+
+Para entrenar el modelo se le pasa el número máximo de iteraciones `maxIter`, parámetro de regularización `regParam`, `userCol` la columna 
+que contiene los datos de usuario, `itemCol` la columna que contiene los datos de producto y por último la columna de puntuación, `ratingCol`
+si los datos son númericos nuestro modeloy los datos no son aleatorios no dará errores. Esto último es importante según recoge la propia 
+[documentación de spark para ALS](https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.recommendation.ALS.html) en la 
+que asegura que datos no deterministas pueden causar errores. 
+
+![Captura desde 2023-03-12 17-28-55](https://user-images.githubusercontent.com/116188406/224558347-a65de9d8-5eb7-4384-8823-56a19ab3af12.png)
+
+En este caso no tenemos una manera de asegurar que nuestros datos son correctos con datos de test de validación ya que los gustos personales
+a fin de cuentas son arbitrarios y ni siquiera muchas veces los propios sistemas de recomendación de las grandes compañías aciertan. En realidad
+estos algoritmos se basan casi siempre en la premisa de valorar que los usuarios compren, no tanto que les guste algo más o menos, también 
+es importante tenerlo en cuenta. 
+
+
+Para probar nuestro modelo realizamos una conversión de nuestros datos nombre de juegos a diccionario de python para facilitar su visualización, 
+ya que lo que nos llegará en última instancia son los `game_id` junto con `user_id` de las recomendaciones para ese usuario. También realizamos 
+un filtrado de juegos populares, ojo, no quiere decir que sean los que más les gustó al público sino los que tienen más puntuaciones. Luego 
+ajustamos la columna de `user_id` con el id del usuario cuyas recomendaciones queramos conocer y aplicamos la función `transform` del modelo
+para realizar las predicciones. Luego ordenaremos las predicciones por puntuación de mayor a menor y tomaremos solo 20 del total. 
+
+
+![Captura desde 2023-03-12 17-44-59](https://user-images.githubusercontent.com/116188406/224559274-20271b57-aaa6-49a4-a661-41981d4f28fa.png)
+
+
+
+Estas son las puntuaciones que tenía por ejemplo este usuario con 9984689
+
+
+![Captura desde 2023-03-12 17-39-04](https://user-images.githubusercontent.com/116188406/224558906-21a16497-e535-4d1a-b5a2-03c9f380f1d7.png)
+
+Y estas fueron las recomendaciones. Podemos ver que recomienda juegos similares
+
+![Captura desde 2023-03-12 17-40-04](https://user-images.githubusercontent.com/116188406/224558948-39b5e9b5-3b54-4360-b1dd-5da1072d56c9.png)
+
+Una vez realizado el modelo y comprobado que funciona es hora de guardarlo para integrarlo en nuestra aplicación. Este proceso es tan 
+sencillo como ejecutar `model.save("nombre_deseado")`. Posteriormente se usará otra librería diferente para cargarlo. Esto genera una 
+carpeta con los datos del modelo entrenado. 
+
+
 ##  6. Integración del modelos en la aplicación 
 
 ##  7. Aplicación de Procesamiento del Lenguaje Natural: Chatbot con dialog flow 
