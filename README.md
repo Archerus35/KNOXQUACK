@@ -9,6 +9,8 @@ Proyecto patrocinado por:
 
 ![pato](https://user-images.githubusercontent.com/116188406/224566327-b77b0702-a616-4753-ad8c-1208481be215.jpg)
 
+[Video explicando el sistema de recomendación](https://drive.google.com/file/d/1ZtnuXhJrD-VZCucKAaIZ9A2WQ-YfnbI6/view?usp=share_link)
+
 ## 1. Justificación y Descripción 
 
 _KnoxQuack es proyecto en el cuál se pueden realizar busquedas de información sobre los lanzamientos de videojuegos, de manera que al introducir el nombre de un videojuego, el programa te devolvera la caratula de dicho juego, la información general de este y una pequeña aportación de reseñas positivas y negativas sobre este mismo, esto esta pensado para que el usuario sea consciente si realmente le merece la pena o no de adquirir dicho producto._
