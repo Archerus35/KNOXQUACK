@@ -12,36 +12,6 @@ from pyspark.ml.recommendation import ALSModel
 from pyspark.sql.functions import col,lit
 from dataclasses import dataclass
 
-def make_recommendations(userid):
-    findspark.init()
-    
-    spark = SparkSession.builder.getOrCreate()
-    
-    model = ALSModel.load('als_model')
-    
-    popularGames = spark.read.option("header", "true").csv('popular_games.csv') 
-    
-    #popularGames.show()
-    
-    popularGames = popularGames.withColumn("game_id", col("game_id").cast("int"))
-    popularGames = popularGames.withColumn("count", col("count").cast("int"))
-    
-    #popularGames.printSchema()
-    
-    
-    userPopular = popularGames.select("game_id").withColumn("user_id", lit(userid))
-    
-    
-    
-    recommendations = model.transform(userPopular)
-    
-    topRecommendations = recommendations.sort(recommendations.prediction.desc()).take(20)
-    
-    #recommendations.show()
-    df_recommendations = spark.createDataFrame(topRecommendations).toPandas()
-    
-    
-    return df_recommendations
 
 
 
@@ -72,7 +42,7 @@ class RecommendationSystem:
         return model
     
     def loadPopularGames(self):
-        popularGames = self.spark.read.option("header", "true").csv('popular_games.csv') 
+        popularGames = self.spark.read.option("header", "true").csv('./metacritic_scrape/popular_games.csv') 
         popularGames = popularGames.withColumn("game_id", col("game_id").cast("int"))
         popularGames = popularGames.withColumn("count", col("count").cast("int"))
         return popularGames

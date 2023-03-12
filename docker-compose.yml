@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  app:
+    build: .
+    environment:
+      - MONGO_URI=mongodb://localhost:27017
+      - MONGO_DB=MONGO_URI["knoxquack"]
+    ports:
+      - "8501:8501"
+    command: ["streamlit", "run", "app.py"]

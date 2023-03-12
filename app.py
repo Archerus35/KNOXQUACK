@@ -14,9 +14,10 @@ from controller import *
 resultados = show_limit(5) 
 juegos = show_all_games()
 usuarios = users_list()
-
 collection = collection()
 
+st.title("KnoxQuack")
+st.subheader("Sistema de recomendación basado en puntuaciones")
 
 
 image = Image.open('image/pato.jpg')
@@ -43,7 +44,7 @@ def display_game_card(game):
     
    
 
-tab1, tab2, tab3 = st.tabs(["Buscar Juegos :gamepad", "Ver Puntuaciones", "Chatbot"])
+tab1, tab2, tab3, tab4 = st.tabs(["Buscar Juegos :gamepad", "Ver Puntuaciones", "Chatbot", "Usuarios con más reviews"])
 
 with tab1: 
     
@@ -110,7 +111,9 @@ with tab3:
 
 
 
-
+with tab4:
+    top_rating_users_data = pd.read_csv('./metacritic_scrape/top_rating_users.csv')
+    st.table(top_rating_users_data)
 
 
 

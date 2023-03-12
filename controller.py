@@ -1,12 +1,13 @@
 import pymongo 
 from pymongo import MongoClient
 from recommendations import *
-
+import streamlit as st
 
 
 # crea una instancia de conexión con la base de datos MongoDB
-client = pymongo.MongoClient("mongodb://localhost:27017/")
-
+#client = pymongo.MongoClient("mongodb://localhost:27017/")
+# OJO CUIDAO esto es para producción
+client = MongoClient(st.secrets["MONGO_URI"])
 # selecciona la base de datos que quieres usar
 db = client.knoxquack
 
@@ -102,6 +103,49 @@ def show_user_reviews(userid):
 
     if user_reviews:
         return user_reviews
+    else:
+        return None
+    
+
+def most_rating_users():
+    top_rating_users = db.reviews.aggregate([
+    {
+        "$group": {
+        "_id": "$user_id",
+        "count": {"$sum": 1}
+        }
+    },
+    {
+        "$match": {
+        "count": {"$gte": 5}
+        }
+    },
+    {
+        "$lookup": {
+        "from": "users",
+        "localField": "_id",
+        "foreignField": "user_id",
+        "as": "user"
+        }
+    },
+    {
+        "$unwind": "$user"
+    },
+    {
+        "$project": {
+        "_id": 1,
+        "count": 1,
+        "username": "$user.username"
+        }
+    },
+    {
+        "$sort": {
+        "count": -1
+        }
+    },
+])
+    if top_rating_users:
+        return top_rating_users
     else:
         return None
     
