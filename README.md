@@ -3,6 +3,84 @@
 _KnoxQuack es proyecto en el cuál se pueden realizar busquedas de información sobre los lanzamientos de videojuegos, de manera que al introducir el nombre de un videojuego, el programa te devolvera la caratula de dicho juego, la información general de este y una pequeña aportación de reseñas positivas y negativas sobre este mismo, esto esta pensado para que el usuario sea consciente si realmente le merece la pena o no de adquirir dicho producto._
 
 ##  2. Obtención de los datos, limpieza y descripción 
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Metacritic_logo.svg" alt="metacritic_logo" height="60px">
+
+Los datos se han obtenido de la página web [metacritic](https://www.metacritic.com/browse/games/release-date/available/pc/metascore). Hemos 
+decidido centrarnos para este proyecto en los juegos de pc y las reviews que realizan los usuarios. Aunque para mostrar los datos de juego 
+hemos tomado también el valor de puntuación de la crítica, lo relevante en este proyecto son los datos de reseñas de usuario, de las que se han 
+tomado fundamentalmente las puntuaciones. 
+
+Todos los tanto obtenidos como generados del procesamiento y la transformación para este proyecto, así como los scripts de scraping que se 
+han utilizado se encuentran en la carpeta `metacritic_scrape` que ejerce las funciones de data lake en nuestro proyecto. 
+
+Para realizar la obtención de los datos, hemos dividido el proceso en dos pasos:
+1. Obtenemos los datos de los juegos junto con las urls para las reviews 
+2. A partir de las urls que hemos conseguido para las reviews, obtenemos tanto estas como los datos de usuarios
+
+Se ha realizado así para evitar realizar demasiadas peticiones de golpe, que el proceso demorase demasiado o que por algún error falle 
+todo a mitad del programa y después de esperar un montón de tiempo te quedes sin nada. A alguien que conozco muy bien le pasó hace poco de hecho
+El proceso se ha llevado a cabo con la librería `BeautifulSoup` de `python`.
+
+Para evitar también hacer un proceso de limpieza de datos posterior, se han extremado las precauciones y se ha depurado conciezudamente para 
+conseguir que los datos salgan lo más limpios posibles y en un formato correcto para su manipulación. Para ello se han usado funciones para 
+formatear fechas al formato usado en España o para detectar los identificadores numéricos, limpiarlos de todo lo que no sea dígito y realizarle
+un casteo para guardarlo en el formato debido. 
+
+
+![Captura desde 2023-03-12 13-45-05](https://user-images.githubusercontent.com/116188406/224564714-a1392716-f145-4a9e-8cd9-695c0a3daf7a.png)
+
+
+Era necesario configurar las cabeceras de las peticiones, que la url realizaba redirecciones, así que hubo que hacer algunos 
+ajustes para sortear ese problema
+
+![Captura desde 2023-03-12 15-12-40](https://user-images.githubusercontent.com/116188406/224564849-095c7703-165e-45ea-a890-0c40b9821a07.png)
+
+Solucionado el problema de las redirecciones ya pudimos iterar sobre las urls cogiendo los datos que buscábamos y almacenándolos 
+
+![Captura desde 2023-03-12 15-15-28](https://user-images.githubusercontent.com/116188406/224564934-88118596-895d-49cc-8863-ad51e7bb0c86.png)
+
+Para los juegos hemos seleccionado los siguientes campos: 
+* `game_id` - Identificador del juego tomado de su propio número en la página
+* `title` - Titulo del juego 
+* `description` - Descripción del juego, está en inglés, del original
+* `score` - Puntuación del juego otorgada por la crítica especializada
+* `date` - Fecha de lanzamiento 
+* `img_url` - url de la imagen en la página para poder mostrarla en la aplicación 
+
+Pudimos haber cogido todos los juegos, pero por precaución seleccionamos 1100 juegos, muestra de datos más que suficiente 
+para poder llevar a cabo el algoritmo junto con los 55.000 registros de reviews. Una vez tomados y ordenados se escribieron 
+al archivo `games.json`. Tambié se escribe un archivo `reviews_urls.csv` con los datos de id del juego y la url de las reviews
+relativas al juego, este archivo será el que lea el script `reviews_metacritic.py` para recoger los datos de las reviews. 
+
+En el script `reviews_metacritic.py` se agregan unas funciones para crear un registro de usuario, el objetivo es comprobar 
+si ese usuario existe en el registro, si no existe se le asigna un identificador que se extrae de una pila de números que 
+empiezan desde los 10 millones hasta el 0 y se guarda en el registro, si el usuario ya existe simplemente se añade su review 
+y listo. 
+
+
+![Captura desde 2023-03-12 15-34-55](https://user-images.githubusercontent.com/116188406/224565555-d7d0d43e-646a-4fb1-acb7-1254baf12f04.png)
+
+Volvemos a realizar las iteraciones en busca de los datos y en este caso la ejecución demora más, puesto que el script está recogiendo más 
+datos que en el primer paso. 
+
+![Captura desde 2023-03-12 15-42-10](https://user-images.githubusercontent.com/116188406/224565617-4addfa61-f681-45a7-8862-d62c4f54f28d.png)
+
+Una vez terminado el proceso, se escriben, de nuevo dos archivos `reviews_data.json` en el que se recogen los datos de las reviews y 
+el registro de usuarios `users_data.csv`  con los campso que se muestran a continuación:
+
+Datos de reviews: 
+* `username`- Nombre de usuario que realizó la review
+* `review_date` - Fecha en la que se realizó la review
+* `score`- Puntuación que le dio el usuario 
+* `game_id` - Identificador del juego 
+* `user_id`- Identificador de usuario
+
+Datos de usuarios:
+* `user_id` - Identificador de usuario
+* `username` - Nombre de usuario
+
+Estos datos se agregaron posteriormente al cluster de mongodb 
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" height="60px">
 
 ##  3. Exploración y visualización de los datos 
 
