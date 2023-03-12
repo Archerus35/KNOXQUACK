@@ -174,7 +174,8 @@ Aunque el Dockerfile quedó al final un poco sucio con tanta depuración realiza
 * Se expone el puerto de `streamlit`
 * Se ejecuta
 
-![Captura desde 2023-03-12 18-06-10](https://user-images.githubusercontent.com/116188406/224561252-03d562d3-7907-4126-acf8-86a608977e48.png)
+![Captura desde 2023-03-12 18-20-11](https://user-images.githubusercontent.com/116188406/224563669-bd1229cb-d9b9-4f60-bc31-538ec595e1a8.png)
+
 
 Para su despliegue en Streamlit Cloud fue ademaś necesario añadir un archivo `packages.txt` con la especificación del paquete de java 8 si no
 se hacía Streamlit arroja una `JavaGatewayException`. 
