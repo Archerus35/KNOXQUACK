@@ -22,6 +22,8 @@ _El despliegue de esta aplicación esta realizado en Streamlit._
 
 _El servicio de despliegue usado para esta ocasión es Streamlit, debido a su guía y accesibilidad bien expuesta para el usuario de forma que se pueda subir y desplegar con mayor facilidad._
 
+Link de la aplicación: https://aresonay-knoxquack-app-5jrn6s.streamlit.app/
+
 
 ## Autores ✒️
 
