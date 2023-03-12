@@ -154,6 +154,33 @@ Y a la hora de recibir las recomendaciones se cargan:
 
 ##  8. Aplicación Web: Dockerización y despliegue
 
+Si bien ajustar las cosas para evitar que nuestra aplicación cargara demasiadas cosas desde la base de datos ha sido 
+la parte más tediosa, resolver los problemas que pueden plantear las distintas versiones, la falta de disponibilidad en 
+máquinas debian de java 8 o las versiones demasiado antiguas que venían en algunas imágenes de docker supusieron un 
+día entero de pruebas y errores. La decisión final fue crear una imagen de docker partiendo de una imagen de ubuntu 
+jammy, sistema en el que se realizó y funciona esta aplicación perfectamente. Una vez que se entiend docker es sencillo. 
+
+Aunque el Dockerfile quedó al final un poco sucio con tanta depuración realiza:
+* Instalación de `python3` con `pip` 
+* pipenv - Se iba a usar y se usó en una prueba para obtener un `requirements.txt` fiable de la aplicación 
+* streamlit - aunque se instala con `requirements.txt`
+* Java 8 
+* `Spark` en su versión `3.2.3`
+* Definición de las variables de entorno `$JAVA_HOME` y `$SPARK_HOME` 
+* Lo necesario también para instalar mongodb (Este paso es necesario para que la aplicación funcione)
+* Definición de variables de mongodb(también necesario)
+* Se define el entorno virtual en el proyecto 
+* Se instalan los `requirements.txt`
+* Se expone el puerto de `streamlit`
+* Se ejecuta
+
+![Captura desde 2023-03-12 18-06-10](https://user-images.githubusercontent.com/116188406/224561252-03d562d3-7907-4126-acf8-86a608977e48.png)
+
+Para su despliegue en Streamlit Cloud fue ademaś necesario añadir un archivo `packages.txt` con la especificación del paquete de java 8 si no
+se hacía Streamlit arroja una `JavaGatewayException`. 
+
+Por último solo es necesario definir la url del cluster de mongodb en el archivo de producción y ponerla como está con `streamlit.secrets`
+
 ##  9. Conclusiones
 
 
