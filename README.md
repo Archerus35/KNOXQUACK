@@ -1,4 +1,15 @@
-# KnoxQuack
+Proyecto patrocinado por:
+
+<img src="https://raw.githubusercontent.com/MalagaTechPark/iabd-tfm-2223/main/malaga_tech_park.png" height="60px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/MalagaTechPark/iabd-tfm-2223/main/IABD_400.png" height="60px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://raw.githubusercontent.com/MalagaTechPark/iabd-tfm-2223/main/accenture.svg" height="60px">
+
+
+# 🎮 KnoxQuack 🦆
+
+## Sistema de recomendación de videojuegos
+
+![pato](https://user-images.githubusercontent.com/116188406/224566327-b77b0702-a616-4753-ad8c-1208481be215.jpg)
+
+## 1. Justificación y Descripción 
 
 _KnoxQuack es proyecto en el cuál se pueden realizar busquedas de información sobre los lanzamientos de videojuegos, de manera que al introducir el nombre de un videojuego, el programa te devolvera la caratula de dicho juego, la información general de este y una pequeña aportación de reseñas positivas y negativas sobre este mismo, esto esta pensado para que el usuario sea consciente si realmente le merece la pena o no de adquirir dicho producto._
 
@@ -80,6 +91,8 @@ Datos de usuarios:
 * `username` - Nombre de usuario
 
 Estos datos se agregaron posteriormente al cluster de mongodb 
+
+
 <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" height="60px">
 
 ##  3. Exploración y visualización de los datos 
@@ -266,21 +279,29 @@ Por último solo es necesario definir la url del cluster de mongodb en el archiv
 
 
 
-## Comenzando 🚀
-
-_Para comenzar a usar KnoxQuack se implementara un sencillo manual para que el usuario no se sienta desorientado a la hora de su uso._
-
-## Despliegue 📦
-
-_El despliegue de esta aplicación esta realizado en Streamlit._
 
 ## Construido con 🛠️
 
-### FRONT
+## Framework web
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Streamlit-logo-primary-colormark-darktext.png" height="60px">
 
-### BACK
+## Lenguajes de programación
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" height="60px">
 
-* Python
+<img src="https://camo.githubusercontent.com/b713d9f05063e22ec2ef142d1ea4f28d4a735e96f12943efb7afc6a1e30298d6/68747470733a2f2f342e62702e626c6f6773706f742e636f6d2f2d444c41614f62634e4b75512f5842596d34737873745a492f41414141414141414151772f693749784e6d45526c53415945474e4848356e582d4f2d6c6373666c5857484377434c63424741732f73313630302f6a617661382e6a7067" height="100px">
+
+## Bases de datos y sistemas de Machine Learning y Big Data
+
+<img src="https://www.pngitem.com/pimgs/m/90-907131_apache-spark-mllib-logo-hd-png-download.png" height="60px">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg" height="60px">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Pandas_logo.svg" height="60px">
+
+## Despliegue 
+
+<img src="https://logos-world.net/wp-content/uploads/2021/02/Docker-Logo.png" height="60px">
+
 
 ## Servicio de despliegue utilizado 🖇️
 
