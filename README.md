@@ -348,10 +348,9 @@ Por último solo es necesario definir la url del cluster de mongodb en el archiv
 
 ##  9. Conclusiones
 
+Este proyecto fue diseñado para que los usuarios utilizaran y navegasen por esta interfaz para resolver sus dudas a la hora de buscar datos sobre un juego en especifico, también de saber si valía la pena adquirir dicho juego o no.
 
-
-
-
+Hay muchas mejoras de por medio, tanto la visualización como ciertos aspectos de tema IA, como lo es nuestro ChatBot integrado, sin duda ha sido un proyecto interesante y ciertamente con ganas de progresar en él para ver hasta cuan lejos puede llegar esta idea con esfuerzo diario.
 
 ## Construido con 🛠️
 
@@ -381,6 +380,8 @@ Por último solo es necesario definir la url del cluster de mongodb en el archiv
 _El servicio de despliegue usado para esta ocasión es Streamlit, debido a su guía y accesibilidad bien expuesta para el usuario de forma que se pueda subir y desplegar con mayor facilidad._
 
 Link de la aplicación: https://aresonay-knoxquack-app-5jrn6s.streamlit.app/
+
+Link del video de la aplicación: https://youtu.be/wbFd0VLiilk
 
 
 ## Autores ✒️
