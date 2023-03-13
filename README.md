@@ -245,6 +245,77 @@ Y a la hora de recibir las recomendaciones se cargan:
 
 ##  7. Aplicación de Procesamiento del Lenguaje Natural: Chatbot con dialog flow 
 
+Para el apartado del Lenguaje Natural, se ha decidido usar un Chat bot, concretamente dialog flow, añadido este a los datos principales de la aplicación,
+acto seguido se mostrará de manera visual como se funciona dicho añadido al proyeto.
+
+<img width="679" alt="image" src="https://user-images.githubusercontent.com/65163077/224585308-6cd6518e-00e1-471c-9aa5-a8fc1d124287.png">
+
+En esta imagen mostraremos lo principal sobre el mantenimiento y uso de Dialog flow de entre ellos distintas secciones:
+
+* Intents: Es donde colocaremos las respuestas y preguntas realizadas por el bot, dandose asi a una pregunta diferentes respuestas en cuestion.
+
+* Entities: Esta sección va destinada a la hora de que una palabra o varias palabras tengan un sentido en comun, dandose asi casos de sinonimos u otras referencias, mediante las entidades podemos sacar un valor clave en la pregunta y el sistema lo detectara automaticamente dando así una de tantas respuestas segun sea lo que se ha fijado.
+
+* Integrations: Utilizada para poder aportar Dialog Flow a las distintas secciones del proyecto y sus exportaciones del mismo.
+
+Ahora bien, iremos por parte principalmente con dos de las secciones ya mencionadas, esas son Intents y Entities:
+
+<img width="316" alt="image" src="https://user-images.githubusercontent.com/65163077/224585881-c119009f-650a-45c8-84b1-d28ed24ed855.png">
+
+En Intents se menciona las intenciones que tiene el chat para poder devolver una respuesta adecuada a la pregunta proporcionada, en este caso tendremos las de por defecto que viene con Dialog, pero se han añadido 4 nuevas, las cuales son:
+
+* Knox - Como archivo principal de saludos del bot e inicio del mismo.
+
+<img width="577" alt="image" src="https://user-images.githubusercontent.com/65163077/224586046-5528a091-b31e-4d7b-a926-8fcb9e5fa855.png">
+
+
+* Juegos-Accion: En este archivo estan recopilados pequeñas informaciones sobre los juegos de esa misma categoría, añadiendo también algunas respuestas.
+
+<img width="589" alt="image" src="https://user-images.githubusercontent.com/65163077/224586075-f441a631-0951-4356-9825-fd3e0cdd7995.png">
+
+
+* Juegos-Terror: En este archivo estan recopilados pequeñas informaciones sobre los juegos de esa misma categoría, añadiendo también algunas respuestas.
+
+<img width="594" alt="image" src="https://user-images.githubusercontent.com/65163077/224586107-4ab244e8-0cee-48d4-be8f-a86206812ab5.png">
+
+
+*Juegos-Rol: En este archivo estan recopilados pequeñas informaciones sobre los juegos de esa misma categoría, añadiendo también algunas respuestas.
+
+<img width="563" alt="image" src="https://user-images.githubusercontent.com/65163077/224586142-d6cf689c-35e0-4daa-92ca-424d1a0c244a.png">
+
+Ahora pasaremos a las Entities:
+
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/65163077/224586201-e828b667-bbd8-45e5-a306-d0b863fb4f06.png">
+
+Dentro de esta tendremos una serie de recopilación de palabras clave, las cuáles sirven para determinar a la hora de preguntar algo al Bot, que este identifique dicha palabra dentro de los demás cuadros de los Intents
+
+Dialog Flow también aparte un pequeño recuadro de pruebas vease como este:
+
+<img width="171" alt="image" src="https://user-images.githubusercontent.com/65163077/224586287-e33f86eb-d71a-45cf-b8e3-399e1dd1d82b.png">
+
+Ahora procederemos a una visual dentro del mismo proyecto:
+
+<img width="519" alt="image" src="https://user-images.githubusercontent.com/65163077/224586339-a7ee81f2-b723-493f-afd3-731faaf6b666.png">
+
+Dentro de la misma página accederemos al apartado del ChatBot, en este veremos el cuadro a la espera de preguntar distintas opciones:
+
+<img width="216" alt="image" src="https://user-images.githubusercontent.com/65163077/224586396-b6296182-d8a3-4267-90a5-089e2c1cd2c5.png">
+
+Si comenzamos con uno de los comandos que sería inicio, este nos devolvera una respuesta cordial.
+
+
+<img width="180" alt="image" src="https://user-images.githubusercontent.com/65163077/224586443-85bfeb32-6c9d-41ee-908b-ff3b5e5701af.png">
+
+Si le pedimos que nos devuelva los juegos de rol mejores recomendados por Knox-Quack, este nos devolvera una pequeña lista junto con una pequeña recomendación que otra.
+
+<img width="178" alt="image" src="https://user-images.githubusercontent.com/65163077/224586752-9cf8a742-11e3-45bd-b663-35a5a144be1f.png">
+
+Lo mismo pasa con los juegos de accion y de terror en dichos casos
+
+<img width="203" alt="image" src="https://user-images.githubusercontent.com/65163077/224587103-ca097012-aa00-4e8c-aae8-2556cf8c016f.png">
+
+
+
 ##  8. Aplicación Web: Dockerización y despliegue
 
 Si bien ajustar las cosas para evitar que nuestra aplicación cargara demasiadas cosas desde la base de datos ha sido 
